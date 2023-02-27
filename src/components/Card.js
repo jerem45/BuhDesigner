@@ -42,9 +42,7 @@ const data = [
 ]
     
 
-    
 
-console.log(data);
 export  function  Card() {
   return (
     <div className='cards'>
