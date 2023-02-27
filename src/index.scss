@@ -10,30 +10,42 @@ body{
 
 }
 
-//------------------les Mixin----------------------
+//------------------les Mixins----------------------
 @mixin flexbox {
   display: flex;
   align-items: center;
 }
+@mixin flex_center_col{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+//------------------Les variables
+//----------color
+$main-color :#1e272e ;
+$secondary-color : #f9ca24;
+$color-three : white ;
+
+//---------border Radius
+$border-radius : 0.5rem ;
+
+// les transitions
+$title-transition :0.6s 0.2s ease-in;
 
 //------------------composants parents----------------------
 .app{
   width: 100%;
   height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include flex_center_col;
 }
 .main__container{
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include flex_center_col;
   flex-direction: column;
   margin: 3rem;
   padding: 2rem;
   width: 100%;
   height: 800px;
-  background-color:#1e272e;
+  background-color:$main-color ;
   border-radius: 0.3rem;
   overflow: hidden;
 }
@@ -41,14 +53,14 @@ body{
   width: 100%;
   height :70%;
   margin: 0.1rem;
-  border-radius: 0.5rem;
+  border-radius: $border-radius ;
   display: flex;
 }
 .section__container_1 {
   width: 100%;
   height :30%;
   margin: 0.1rem;
-  border-radius: 0.5rem;
+  border-radius: $border-radius ;
   display: flex;
   justify-content: space-around;
   margin-top: 0.5rem
@@ -61,12 +73,12 @@ body{
 .cards{
    @include flexbox;
    flex-direction: column;
-   background-color: white;
+   background-color: $color-three ;
    width: 50%;
    height: 100%;
    overflow: hidden;
    border: none;
-   border-radius: 0.5rem;
+   border-radius: $border-radius ;
 
     .cards_header {
       padding: 1rem;
@@ -78,7 +90,8 @@ body{
           .headerLogo{
             padding: 2rem ;
             font-size: 60px;
-            color: #1e272e;
+            color:$main-color ;
+            transition: 1s 0.1s ease-in;
           }
 
           }
@@ -100,7 +113,22 @@ body{
             }
           }
 }
-
+.cards:hover{
+  .headerLogo{
+    padding: 2rem ;
+    font-size: 60px;
+    color:red;
+  }
+  h1{
+    transform: rotate(360deg)
+   }
+   .rotate{
+    color: $secondary-color
+   }
+   .arrow{
+    transform: rotate(-10000deg)
+   }
+}
 
 .Cards_middle{
   @include flexbox;
@@ -116,6 +144,7 @@ body{
   }
   h1{
    font-size: 100px;
+   transition: 0.5s 0.1s ease-in;
   }
   .cards__footer{
     position: relative;
@@ -131,14 +160,15 @@ body{
    font-size: 100px;
    transform: rotate(15deg);
    font-weight: bolder;
-   text-shadow: white   0px 3px ;
+   text-shadow: $color-three 0px 3px ;
    position: absolute;
    left: 95%;
+   transition: 0.5s 0.1s ease-in;
   }        
   .separation{
    width: 90%;
    height: 1px;
-   background-color: #1e272e;
+   background-color:$main-color ;
   }
   h2{
    padding:0 0rem 0rem 1rem;
@@ -152,15 +182,14 @@ body{
   font-size: 30px;
   top: 60%;
   left: 90%;
+  transition: 60s 0s ease-in-out;
   }
 }
 
 //------------composants card header SIDE------------------
 .header___side{
   width: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include flex_center_col;
   flex-wrap: wrap;
 }
 .cards__case,
@@ -170,7 +199,7 @@ body{
   width:49%;
   height: 50%;
   margin: 0.1rem;
-  border-radius: 0.5rem;
+  border-radius: $border-radius ;
  
 }
 .cards__case{
@@ -180,13 +209,13 @@ body{
    .container{
       width: 100% ;
       height: 80px;
-      background-color: #f9ca24;
-      color: #1e272e;
+      background-color: $secondary-color;
+      color:$main-color ;
       text-transform: uppercase;
       display: flex;
       justify-content: space-around;
       align-items: center;
-      border-radius: 0.5rem;
+      border-radius: $border-radius ;
     .logoCase{
       font-size: 50px;
     }
@@ -198,15 +227,16 @@ body{
   .container__enterprise{
     width: 100% ;
     height: 80px;
-    background-color: #ffffff;
-    color: #1e272e;
+    background-color: $color-three ;
+    color:$main-color ;
     text-transform: uppercase;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 0.5rem;
-    margin-top: 0.5rem;
+    border-radius: $border-radius ;
+    margin-top: $border-radius ;
     transform: rotate(8deg);
+    transition: 0.5s 0.1s ease-in;
     .logoEnterprise{
       font-size: 50px;
       color:#30336b ;
@@ -218,20 +248,44 @@ body{
         }
   }
   .title{
-    margin-top: 4rem;
+      margin-top: 4rem;
       margin-left: 2rem;
       font-size: 30px;
       color: rgb(230, 224, 224);
       text-transform: uppercase;
+      transition: $title-transition;
   }
 }
-
+.cards__case:hover{
+  .container__enterprise{
+    width: 100% ;
+    height: 80px;
+    background-color: $color-three ;
+    color:$main-color ;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: $border-radius ;
+    margin-top: $border-radius ;
+    transform: rotate(0deg);
+    .logoEnterprise{
+      font-size: 50px;
+      color:#30336b ;
+    }  
+   
+} 
+.title{
+     color: $secondary-color;
+     transform: scale(1.1);
+    }
+}
 //--------------composants Card Navigation------------------
 .cards__nav{
   background-color:inherit;
   display: flex;
   flex-direction: column;
-  align-items: start;
+  align-items: left;
 
      ul{
       text-decoration: none;
@@ -243,16 +297,29 @@ body{
       
      }
      li{
-     
-      margin-top: 0.5rem;
+      margin-top: $border-radius ;
       font-size: 20px;
       text-transform: uppercase;
+      transition: 0.5s 0.1s ease-in;
+     }
+     li:hover{
+      color: $secondary-color;
+      transform: scale(1.1);
+      cursor: pointer;
      }
      span{
       margin-left: 2rem;
       font-size: 30px;
       color: rgb(230, 224, 224);
+      transition: $title-transition;
      }
+}
+.cards__nav:hover{
+  span{
+    margin-left: 2rem;
+    font-size: 32px;
+    color: $secondary-color;
+   }
 }
 .cards__img{
   background-color: #fcfaf7;
@@ -281,11 +348,11 @@ body{
       height: 100%;
       object-position: center;
       object-fit: cover;
-      border-radius: 0.5rem;
+      border-radius: $border-radius ;
     }
     p{
       position: absolute;
-      color: #ffffff;
+      color: $color-three ;
       top: 10%;
       text-transform: capitalize;
       font-size: 30px;
@@ -301,8 +368,8 @@ body{
  flex-direction: column;
  width: 49%;
  height: 100%;
- background-color: #ffffff;
- border-radius: 0.5rem;
+ background-color: $color-three ;
+ border-radius: $border-radius ;
 
 }
 .comment__header{
@@ -366,10 +433,8 @@ body{
   width: 55px;
   height: 55px;
   border-radius: 50%;
-  background-color: #f9ca24;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background-color: $secondary-color;
+  @include flex_center_col;
 }
  .logoComment{
     font-size: 24px;
@@ -433,7 +498,7 @@ height: auto;
       margin: 0;
       padding: 0;
       width: auto;
-      background-color: #1e272e;
+      background-color:$main-color ;
     }
   
 .main__container{
@@ -470,9 +535,7 @@ height: auto;
 //cards side header
 .header___side{
   width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include flex_center_col;
   flex-wrap: wrap;
 }
 .cards__case,
@@ -480,7 +543,7 @@ height: auto;
 .cards__img
 {
   width:50%;
-  height: 100%;
+  height: 300px;
   border-radius: 0.1rem;
   margin: 0;
   padding: 0;
@@ -513,7 +576,7 @@ height: auto;
  flex-direction: column;
  width: 100%;
  height: 100%;
- background-color: #ffffff;
+ background-color: $color-three ;
  border-radius: 0.1rem;
  margin-top: 0rem;
  padding-top: 1rem;
@@ -532,7 +595,7 @@ height: auto;
     margin: 0;
     padding: 0;
     width: 100vh;
-    background-color:#1e272e;
+    background-color:$main-color ;
     border-radius: 0;
     overflow: hidden;
   }
